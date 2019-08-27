@@ -124,31 +124,33 @@ requireDir('./tasks')
 
 ## 5. 自动化错误与解决方案
 
-+ Q：Failed to load external module @babel/register
++ Q：Failed to load external module @babel / register
 	A：gulp @3.9.1会出现此问题，安装gulp @3.9.0即可 
-```bash
-npm i -g gulp@3.9.0
-```
+	```bash
+	npm i -g gulp@3.9.0
+	```
 
 + Q：gulp中使用 webpack 4.0 版本报错，webpackv2 之后都用rules
-```bash
-WARNING in configuration
-The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
-```
+	```bash
+	WARNING in configuration
+	The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
+	```
+
 	A：加上mode 和 把module里的那个loaders改成rules
-```javascript
-	mode: 'production',
-	module: {
-		rules: [{
-			test:/\.js/,
-			loader: 'babel-loader'
-		}]
-	}
-```
+	```javascript
+		mode: 'production',
+		module: {
+			rules: [{
+				test:/\.js/,
+				loader: 'babel-loader'
+			}]
+		}
+	```
+
 + 在执行`gulp --watch`后，一直没有`listening on 35729 ...` , 后来发现`/util/args.js`忘记了：
-```javascript
-export default args
-```
+	```javascript
+	export default args
+	```
 
 + 注意：现在babel已经升级到7，安装的时候记得要安装loader与Babel对应的版本，不要混用babel 7.x以后的@版本
 
