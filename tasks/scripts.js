@@ -32,7 +32,7 @@ gulp.task('scripts', ()=>{
 				chunks: false
 			}))
 		})
-		.pipe(gulp.dest('server/public/javascripts'))
+		.pipe(gulp.dest('server/public/js'))
 		.pipe(rename({
 			basename: 'cp',
 			extname: '.min.js'
@@ -41,6 +41,6 @@ gulp.task('scripts', ()=>{
 			compress:{properties:false},
 			output:{'quote_keys':true}
 		}))
-		.pipe(gulp.dest('server/public/javascripts'))
+		.pipe(gulp.dest('server/public/js'))
 		.pipe(gulpif(args.watch, livereload()))
 })
