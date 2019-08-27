@@ -74,7 +74,7 @@ create : public/
 + `npm install` 自动安装目录下package.json的依赖包
 
 
-### 4.2 task 目录 >
+### 4.2 task 目录 
 这个构建目录下创建很多任务的js 比如文件的合并、脚本的编译、模版的自动更新等等
 
 + 新建`util` 放置常见脚本 新建`arg.js`放置命令行解析脚本
@@ -107,7 +107,7 @@ npm install gulp-live-server del gulp-sequence --save-dev
 ```bash
 npm install babel-loader babel-core babel-preset-env babel-preset-es2015 webpack --save-dev
 ```
-```bash
+```javascript
 // 配置文件
 {
 	"presets": ["es2015"]
@@ -115,8 +115,10 @@ npm install babel-loader babel-core babel-preset-env babel-preset-es2015 webpack
 ```
 + gulpfile.babel.js
 gulp 会根据 requireDir 提供的路径自动加载该目录下所有的任务，并找到任务 default 开始执行。
-```bash
-import requireDir from 'require-dir' // 可以将任务分离到多个文件
+
+```javascript
+// 可以将任务分离到多个文件
+import requireDir from 'require-dir' 
 // gulp 会根据 requireDir 提供的路径自动加载该目录下所有的任务，并找到任务 default 开始执行。
 requireDir('./tasks')
 ```
@@ -124,7 +126,7 @@ requireDir('./tasks')
 
 ## 5. 自动化错误与解决方案
 
-+ Q：Failed to load external module @babel / register
++ Q：Failed to load external module @babel / register <br/>
 	A：gulp @3.9.1会出现此问题，安装gulp @3.9.0即可 
 	```bash
 	npm i -g gulp@3.9.0
@@ -156,37 +158,40 @@ requireDir('./tasks')
 
 
 ## 6. 项目运行
++ 终端输入：
+	```bash
+	gulp --watch
+	```
 
-```
-gulp --watch
-```
-```
-deMacBook-Pro:es6-lotteryticket connie$ gulp --watch
-[15:41:50] Requiring external module babel-core/register
-[15:41:52] Using gulpfile ~/Documents/web-note/ES6/es6-lotteryticket/gulpfile.babel.js
-[15:41:52] Starting 'build'...
-[15:41:52] Starting 'clean'...
-[15:41:52] Finished 'clean' after 32 ms
-[15:41:52] Starting 'css'...
-[15:41:52] Finished 'css' after 15 ms
-[15:41:52] Starting 'pages'...
-[15:41:52] Finished 'pages' after 13 ms
-[15:41:52] Starting 'scripts'...
-[15:41:53] Version: webpack 4.39.2
-Built at: 2019-08-27 15:41:53
-   Asset       Size  Chunks             Chunk Names
-index.js  964 bytes       0  [emitted]  index
-Entrypoint index = index.js
-[15:41:53] Finished 'scripts' after 856 ms
-[15:41:53] Starting 'browser'...
-[15:41:53] Starting 'server'...
-livereload[tiny-lr] listening on 35729 ...
-GET / 200 23.798 ms - 128
++ 结果：
+	```
+	deMacBook-Pro:es6-lotteryticket connie$ gulp --watch
+	[15:41:50] Requiring external module babel-core/register
+	[15:41:52] Using gulpfile ~/Documents/web-note/ES6/es6-lotteryticket/gulpfile.babel.js
+	[15:41:52] Starting 'build'...
+	[15:41:52] Starting 'clean'...
+	[15:41:52] Finished 'clean' after 32 ms
+	[15:41:52] Starting 'css'...
+	[15:41:52] Finished 'css' after 15 ms
+	[15:41:52] Starting 'pages'...
+	[15:41:52] Finished 'pages' after 13 ms
+	[15:41:52] Starting 'scripts'...
+	[15:41:53] Version: webpack 4.39.2
+	Built at: 2019-08-27 15:41:53
+	   Asset       Size  Chunks             Chunk Names
+	index.js  964 bytes       0  [emitted]  index
+	Entrypoint index = index.js
+	[15:41:53] Finished 'scripts' after 856 ms
+	[15:41:53] Starting 'browser'...
+	[15:41:53] Starting 'server'...
+	livereload[tiny-lr] listening on 35729 ...
+	GET / 200 23.798 ms - 128
+	```
 
-```
-在浏览器输入：`localhost：3000`
-因为用的express搭建的服务器，默认是3000端口，如果端口占用，可到`server/bin/www` 里更改
-页面是空白页，可到默认入口模板文件里 `app/views/index.ejs` 里随意编辑些html预览
++ 在浏览器输入：`localhost：3000`
+因为用的express搭建的服务器，默认是3000端口，如果端口占用，可到`server/bin/www` 里更改 <br/>
+浏览器打开是空白页，可到默认入口模板文件里 `app/views/index.ejs` 里随意编辑些html预览
+
 
 ## 7. 浏览器热更新
 > 连接中间件，将livereload脚本添加到响应中。不需要浏览器插件。如果您对浏览器插件感到满意，那么您不需要这个中间件
@@ -194,17 +199,17 @@ GET / 200 23.798 ms - 128
 
 + 安装`connect-livereload`
 
-```bash
-npm i connect-livereload --save-dev
-```
-然后在`server/app.js` 里添加：
+	```bash
+	npm i connect-livereload --save-dev
+	```
++ 然后在`server/app.js` 里添加：
 
-```javascript
-app.use(express.static(path.join(__dirname, 'public')));
-// 注意顺序
-// 热更新
-app.use(require('connect-livereload')());
-```
+	```javascript
+	app.use(express.static(path.join(__dirname, 'public')));
+	// 注意顺序
+	// 热更新
+	app.use(require('connect-livereload')());
+	```
 
 
 
