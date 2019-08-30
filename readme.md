@@ -159,36 +159,37 @@ requireDir('./tasks')
 
 ## 6. 项目运行
 + 终端输入：
-	```bash
-	gulp --watch
-	```
+```bash
+gulp --watch
+```
 
 + 结果：
-	```
-	deMacBook-Pro:es6-lotteryticket connie$ gulp --watch
-	[15:41:50] Requiring external module babel-core/register
-	[15:41:52] Using gulpfile ~/Documents/web-note/ES6/es6-lotteryticket/gulpfile.babel.js
-	[15:41:52] Starting 'build'...
-	[15:41:52] Starting 'clean'...
-	[15:41:52] Finished 'clean' after 32 ms
-	[15:41:52] Starting 'css'...
-	[15:41:52] Finished 'css' after 15 ms
-	[15:41:52] Starting 'pages'...
-	[15:41:52] Finished 'pages' after 13 ms
-	[15:41:52] Starting 'scripts'...
-	[15:41:53] Version: webpack 4.39.2
-	Built at: 2019-08-27 15:41:53
-	   Asset       Size  Chunks             Chunk Names
-	index.js  964 bytes       0  [emitted]  index
-	Entrypoint index = index.js
-	[15:41:53] Finished 'scripts' after 856 ms
-	[15:41:53] Starting 'browser'...
-	[15:41:53] Starting 'server'...
-	livereload[tiny-lr] listening on 35729 ...
-	GET / 200 23.798 ms - 128
-	```
+```
+deMacBook-Pro:es6-lotteryticket connie$ gulp --watch
+[15:41:50] Requiring external module babel-core/register
+[15:41:52] Using gulpfile ~/Documents/web-note/ES6/es6-lotteryticket/gulpfile.babel.js
+[15:41:52] Starting 'build'...
+[15:41:52] Starting 'clean'...
+[15:41:52] Finished 'clean' after 32 ms
+[15:41:52] Starting 'css'...
+[15:41:52] Finished 'css' after 15 ms
+[15:41:52] Starting 'pages'...
+[15:41:52] Finished 'pages' after 13 ms
+[15:41:52] Starting 'scripts'...
+[15:41:53] Version: webpack 4.39.2
+Built at: 2019-08-27 15:41:53
+   Asset       Size  Chunks             Chunk Names
+index.js  964 bytes       0  [emitted]  index
+Entrypoint index = index.js
+[15:41:53] Finished 'scripts' after 856 ms
+[15:41:53] Starting 'browser'...
+[15:41:53] Starting 'server'...
+livereload[tiny-lr] listening on 35729 ...
+GET / 200 23.798 ms - 128
+```
 
-+ 在浏览器输入：`localhost：3000`
++ 在浏览器输入：`localhost：3000` <br/>
+
 因为用的express搭建的服务器，默认是3000端口，如果端口占用，可到`server/bin/www` 里更改 <br/>
 浏览器打开是空白页，可到默认入口模板文件里 `app/views/index.ejs` 里随意编辑些html预览
 
@@ -199,17 +200,27 @@ requireDir('./tasks')
 
 + 安装`connect-livereload`
 
-	```bash
-	npm i connect-livereload --save-dev
-	```
+```bash
+npm i connect-livereload --save-dev
+```
+
 + 然后在`server/app.js` 里添加：
 
-	```javascript
-	app.use(express.static(path.join(__dirname, 'public')));
-	// 注意顺序
-	// 热更新
-	app.use(require('connect-livereload')());
-	```
+```javascript
+app.use(express.static(path.join(__dirname, 'public')));
+// 注意顺序
+// 热更新
+app.use(require('connect-livereload')());
+```
 
+## 8. 安装es6新语法兼容补丁
+安装`babel`
+```bash
+npm install babel-polyfill --save-dev
+```
+然后在入口文件`app/index.js` 引入
 
+```javascript
+import "babel-polyfill"
+```
 

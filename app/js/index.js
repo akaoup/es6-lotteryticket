@@ -1,8 +1,2 @@
-class Test {
-	constructor () {
-		this.a = 'hello'
-	}
-}
-
-let test = new Test();
-document.body.innerHTML = test.a;
+import 'babel-polyfill';
+import './class/lesson9-symbol.js';
